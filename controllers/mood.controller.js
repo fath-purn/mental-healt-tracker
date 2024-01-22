@@ -1,8 +1,5 @@
 const prisma = require("../libs/prisma");
 const { moodValidationSchema } = require("../validations/mood.validation");
-const imagekit = require("../libs/imagekit");
-const path = require("path");
-const Joi = require("joi");
 
 const create = async (req, res, next) => {
   try {

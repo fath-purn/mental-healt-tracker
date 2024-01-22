@@ -1,8 +1,5 @@
 const prisma = require("../libs/prisma");
 const { taggarValidationSchema } = require("../validations/taggar.validation");
-const imagekit = require("../libs/imagekit");
-const path = require("path");
-const Joi = require("joi");
 
 const create = async (req, res, next) => {
   try {

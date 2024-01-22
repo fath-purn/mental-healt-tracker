@@ -5,7 +5,6 @@ const {
 } = require("../validations/artikel.validation");
 const imagekit = require("../libs/imagekit");
 const path = require("path");
-const Joi = require("joi");
 
 const create = async (req, res, next) => {
   try {

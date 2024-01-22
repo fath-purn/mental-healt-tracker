@@ -5,11 +5,9 @@ const jwt = require("jsonwebtoken");
 const {
   registerValidationSchema,
   loginUserSchema,
-  registerAdminValidationSchema,
 } = require("../validations/user.validation");
 const imagekit = require("../libs/imagekit");
 const path = require("path");
-const Joi = require("joi");
 
 function toIndonesianPhoneNumber(phoneNumber) {
   let digitsOnly = phoneNumber.replace(/\D/g, "");

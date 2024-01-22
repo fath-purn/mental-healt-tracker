@@ -13,7 +13,6 @@ const {
   checkAdmin,
 } = require("../controllers/user.controller");
 const verifyToken = require("../libs/verifyToken");
-const { upload } = require("../libs/multer");
 
 router.post("/add", verifyToken, checkAdmin, create);
 router.put("/update/:id", verifyToken, checkAdmin, update);
