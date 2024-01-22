@@ -1,0 +1,86 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// model Admin {
+//   id       Int    @id @default(autoincrement())
+//   email    String @unique
+//   password String
+// }
+
+model User {
+  id       Int      @id @default(autoincrement())
+  nama     String
+  email    String   @unique
+  role     Role @default(PENGGUNA)
+  no_hp    String?
+  username String?
+  password String
+  validasi Boolean  @default(false)
+  created  DateTime @default(now())
+  updated  DateTime @updatedAt
+
+  mood  Mood[]
+  media Media[]
+}
+
+model Taggar {
+  id      Int       @id @default(autoincrement())
+  nama    String
+  created DateTime  @default(now())
+  updated DateTime  @updatedAt
+  artikel Artikel[]
+}
+
+model Artikel {
+  id        Int      @id @default(autoincrement())
+  judul     String
+  deskripsi String?
+  id_taggar  Int
+  created   DateTime @default(now())
+  updated   DateTime @updatedAt
+  taggar    Taggar   @relation(fields: [id_taggar], references: [id])
+
+  media Media[]
+}
+
+model Mood {
+  id         Int           @id @default(autoincrement())
+  id_user    Int
+  mood_today EnumMoodToday
+  created    DateTime      @default(now())
+  updated    DateTime      @updatedAt
+  user       User          @relation(fields: [id_user], references: [id])
+}
+
+model Media {
+  id         Int      @id @default(autoincrement())
+  id_admin   Int?
+  id_user    Int?
+  id_artikel Int?
+  id_link    String
+  link       String
+  created    DateTime @default(now())
+  updated    DateTime @updatedAt
+  user       User?    @relation(fields: [id_user], references: [id])
+  artikel    Artikel? @relation(fields: [id_artikel], references: [id])
+}
+
+enum EnumMoodToday {
+  HAPPY
+  NEUTRAL
+  SAD
+}
+
+enum Role {
+  PENGGUNA
+  ADMIN
+}
